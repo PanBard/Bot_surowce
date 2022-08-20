@@ -17,4 +17,4 @@ przycisku_startu.JPG
 przycisku_zgody_prywatnosci.JPG
 wysylania_surowcow.JPG
 zamkniecia_okna.JPG
-zzz_nazwy_SpokDre.JPG
+zamkniecia_okna2.JPG
