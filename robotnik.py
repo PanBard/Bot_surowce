@@ -40,6 +40,12 @@ class Robotnik:
     offset_y = 0
     screen_x = None
     screen_y = None
+    screen_x_hajs =None
+    screen_y_hajs = None
+
+
+
+
 
     def wykryj_i_kliknij(self, numer_celu, threshold=0.8):
 
@@ -120,8 +126,8 @@ class Robotnik:
         rectangles, weights = cv.groupRectangles(rectangles, groupThreshold=1, eps=0.5)
         # print(rectangles)
 
-        points = []
-
+        points_x = []
+        points_y = []
         # Loop over all the rectangles
         for (x, y, w, h) in rectangles:
             # Determine the center position
@@ -130,8 +136,14 @@ class Robotnik:
             # Save the points
             self.screen_x = center_x + self.window_offset[0]
             self.screen_y = center_y + self.window_offset[1]
+            points_x.append(self.screen_x)
+            points_y.append(self.screen_y)
+
+
 
         if self.screen_x and self.screen_y:
+            print(f"Lista xsow: {points_x}")
+            print(f"Lista ykow: {points_y}")
             pyautogui.moveTo(x=self.screen_x, y=self.screen_y)
             sleep(0.5)
             pyautogui.click()
@@ -147,6 +159,18 @@ class Robotnik:
             with open("Raport.txt", "a") as text_file:
                 text_file.writelines( f"-[{aktualny_czas}]- "+"Wykonano przesuniecie kursora na pozycje: " + obiekt.rstrip('.JPG') + f" o wspolrzednych: {self.screen_x , self.screen_y}"+'\n')
 
+            if numer_celu == 18:
+                numerki = len(points_x)
+                for x in range(numerki):
+                    pyautogui.moveTo(x=points_x[x], y=points_y[x])
+                    sleep(0.5)
+                    pyautogui.click()
+                    print("Przesunieto kursor myszy na wspolrzedne podczas wykonywania petli for: ", f"[ {self.screen_x}]", f"[ {self.screen_y},]")
+
+                    with open("Raport.txt", "a") as text_file:
+                        text_file.writelines(
+                            f"-[{aktualny_czas}]- " + "Wykonano przesuniecie kursora na pozycje: " + obiekt.rstrip(
+                                '.JPG') + f" o wspolrzednych: {self.screen_x, self.screen_y}" + '\n')
 
             if self.WLACZ_HANDEL:
                 sleep(0.5)
@@ -258,8 +282,6 @@ class Robotnik:
             self.screen_x = None
             self.screen_y = None
             return False
-
-
 
 
 
@@ -410,7 +432,7 @@ class Robotnik:
 
 
 
-    def wykryj_i_kliknij_skylabu(self, numer_celu, threshold=0.8):
+    def wykryj_i_kliknij_skylabu(self, numer_celu, threshold=0.9):
 
 
         obiekt = self.nazwa_celu2[numer_celu].rstrip('\n')
@@ -504,6 +526,9 @@ class Robotnik:
             self.screen_y = center_y + self.window_offset[1]
 
         if self.screen_x and self.screen_y:
+
+            self.screen_x_hajs = self.screen_x
+            self.screen_y_hajs = self.screen_y
             pyautogui.moveTo(x=self.screen_x, y=self.screen_y)
             sleep(0.5)
             pyautogui.click()
@@ -519,6 +544,23 @@ class Robotnik:
             with open("Raport.txt", "a") as text_file:
                 text_file.writelines( f"-[{aktualny_czas}]- "+"Wykonano przesuniecie kursora na pozycje: " + obiekt.rstrip('.jpg') + f" o wspolrzednych: {self.screen_x , self.screen_y}"+'\n')
 
+            if numer_celu==30: #promerium
+                pyautogui.moveTo(self.screen_x + 36,self.screen_y + 175)
+                sleep(0.5)
+                pyautogui.click()
+                sleep(1)
+
+            if numer_celu==31: #prometid
+                pyautogui.moveTo(self.screen_x + 260,self.screen_y + 60)
+                sleep(0.5)
+                pyautogui.click()
+                sleep(1)
+
+            if numer_celu==32:  #duranium
+                pyautogui.moveTo(self.screen_x + 209,self.screen_y + 97)
+                sleep(0.5)
+                pyautogui.click()
+                sleep(1)
 
             if self.WLACZ_USTAWIANIE_USTAWIEN:
                 sleep(0.5)
@@ -661,3 +703,33 @@ class Robotnik:
         obiekt = self.nazwa_celu2[numer_celu].rstrip('\n')
         obiekt = obiekt.rstrip('.jpg')
         return obiekt
+
+    def wyplata(self,numer_statku ,ilosc_kredytow):
+
+        ilosc_kredytow_str = str(ilosc_kredytow)
+        pyautogui.press('tab', presses=25) #tabela wyboru
+        pyautogui.press('enter')
+        pyautogui.press('down', presses=numer_statku) # wybieramy statek
+        pyautogui.press('enter')
+        sleep(0.5)
+        pyautogui.press('tab', presses=10)
+        pyautogui.press('tab', presses=10)
+        pyautogui.press('tab', presses=10)
+        pyautogui.press('tab', presses=13)
+        pyautogui.write(ilosc_kredytow_str)
+        pyautogui.press('tab', presses=3)
+        pyautogui.press('enter')
+
+    def wyplata2(self,wspolrzedna_x ,wspolrzedna_y, pozycja_statku, ilosc_kredytow):
+        ilosc_kredytow_str = str(ilosc_kredytow)
+        pyautogui.moveTo(wspolrzedna_x - 77, wspolrzedna_y - 46)
+        sleep(0.5)
+        pyautogui.click()
+        sleep(0.5)
+        pyautogui.press('down', presses=pozycja_statku)  # wybieramy statek
+        pyautogui.press('enter')
+        sleep(0.3)
+        pyautogui.moveTo(wspolrzedna_x - 210,wspolrzedna_y - 46)
+        pyautogui.click()
+        pyautogui.write(ilosc_kredytow_str)
+        pyautogui.press('enter')

@@ -12,6 +12,9 @@ class Kierownik():
     stan_ulepszania_skylabu = []
     nazwy_ulepszanych_modulow =[]
 
+    robocza_wspolrzedna_x = None
+    robocza_wspolrzedna_y = None
+
 
 
     def rozpocznij_sekwencje_zarabiania(self, login, rodzaj_surek, ilosc_surek):
@@ -48,12 +51,33 @@ class Kierownik():
         self.czekaj(18,15,5) #czekaj az pojawi sie przycisk zamkniecia okna lub startu lub ikona minimapy
         self.prewencja_przed_wyskakujacymi_oknami("zamykanie_okna")
         self.sprawdzanie_skylabu_czy_skonczony_proces()
-        # self.ulepszenie_rafinerii_kolektora(login,5) #modul podstawowy
-        # self.ulepszenie_rafinerii_kolektora(login,6) #modul sloneczny
+
+        # self.ulepszenie_rafinerii_kolektora(login,20) #wlonczanie pierwszy raz prometidu
+        # self.ulepszenie_rafinerii_kolektora(login,18) #wlonczanie pierwszy raz duranium
+        # self.ulepszenie_rafinerii_kolektora(login, 11)  # wlonczanie pierwszy raz promerium
+        # self.ulepszenie_rafinerii_kolektora(login, 10)  # wlonczanie pierwszy raz xeno
+
+        # self.wlaczenie_rafinerii_kolektora(login,30) # wznowienieraf promerium
+        # self.wlaczenie_rafinerii_kolektora(login,31) # wznowienieraf prometidu
+        # self.wlaczenie_rafinerii_kolektora(login,32) # wznowienieraf duranium
+
+        # self.wylaczenie_rafinerii_kolektora(login,26) #wylonczanie promerium
+        # self.wylaczenie_rafinerii_kolektora(login,19) #wylonczanie prometidu
+        # self.wylaczenie_rafinerii_kolektora(login, 17)  # wylonczanie duranium
+
+        self.ulepszenie_rafinerii_kolektora(login,5) #modul podstawowy
+        self.ulepszenie_rafinerii_kolektora(login,6) #modul sloneczny
         self.ulepszenie_rafinerii_kolektora(login, 4)  # modul magazynowy
+        #
         # self.ulepszenie_rafinerii_kolektora(login, 1)  # kolektor endurium
         # self.ulepszenie_rafinerii_kolektora(login, 2)  # kolektor prometrium
         # self.ulepszenie_rafinerii_kolektora(login, 3)  # kolektor terbium
+        #
+        # self.ulepszenie_rafinerii_kolektora(login,19) #rafineria prometidu
+        # self.ulepszenie_rafinerii_kolektora(login,17) #rafineria duranium
+        # self.ulepszenie_rafinerii_kolektora(login, 26)  # rafineria promerium
+        # self.ulepszenie_rafinerii_kolektora(login, 27)  # modul xeno
+
         self.zapisz_skrina_o_stanie_skylabu(login)
         self.wylonczanie_darkorbit()
         self.napisz_sprawozdanie_skylabu(login)
@@ -82,6 +106,7 @@ class Kierownik():
 
     def czekaj(self, na_obiekt1, na_obiekt2, na_obiekt3):
         czas = time()
+        self.wpis_do_raportu("Rozpoczeto procedure czekania")
         while True:
             if self.bocik.wykryj(na_obiekt1) or self.bocik.wykryj(na_obiekt2) or self.bocik.wykryj(na_obiekt3):
                 czas2 = time() - czas
@@ -118,7 +143,7 @@ class Kierownik():
         self.bocik.wykryj_i_kliknij_skylabu(9) # klikamy na przycisk ulepszenie
         sleep(1)
         self.bocik.wykryj_i_kliknij_skylabu(7)  # klikamy na przycisk buduj
-        self.czekaj(11,11,11)# czeka na przycisk ok
+        self.czekaj(11,11,15)# czeka na przycisk ok lub przycisk startu
         if self.bocik.wykryj_i_kliknij_skylabu(8):  # odczytujemy potwierdzenie o modernizacji
             self.wpis_do_raportu(f"Modul {self.bocik.daj_nazwe_obiektu(nr_kolektora)} zostal ulepszony dla {login} ------ ####################")
             self.stan_ulepszania_skylabu.append(1)
@@ -128,7 +153,50 @@ class Kierownik():
             self.stan_ulepszania_skylabu.append(0)
             self.nazwy_ulepszanych_modulow.append(self.bocik.daj_nazwe_obiektu(nr_kolektora))
         sleep(1)
-        self.klik_w_ok()
+        if self.klik_w_ok():
+            pass
+        else: self.bocik.wykryj_i_kliknij(19)
+
+        sleep(2)
+
+    def wylaczenie_rafinerii_kolektora(self, login, nr_kolektora):
+        self.bocik.wykryj_i_kliknij_skylabu(nr_kolektora)  # klikamy na wybrana rafinerie/kolektor
+        sleep(1)
+        self.bocik.wykryj_i_kliknij_skylabu(12)  # klikamy na przycisk wylaczania
+        self.czekaj(11,11,11)
+        if self.bocik.wykryj_i_kliknij_skylabu(25):  # odczytujemy potwierdzenie o wylaczeniu
+            self.wpis_do_raportu(f"Modul {self.bocik.daj_nazwe_obiektu(nr_kolektora)} zostal WYLACZONY (OFF) dla {login} ------ ####################")
+            self.stan_ulepszania_skylabu.append(1)
+            self.nazwy_ulepszanych_modulow.append(self.bocik.daj_nazwe_obiektu(nr_kolektora))
+        else:
+            self.wpis_do_raportu(f"### dla {login} nie wylaczono: {self.bocik.daj_nazwe_obiektu(nr_kolektora)} ###")
+            self.stan_ulepszania_skylabu.append(0)
+            self.nazwy_ulepszanych_modulow.append(self.bocik.daj_nazwe_obiektu(nr_kolektora))
+        sleep(1)
+        if self.klik_w_ok():
+            pass
+        else: self.bocik.wykryj_i_kliknij(19)
+
+        sleep(2)
+
+    def wlaczenie_rafinerii_kolektora(self, login, nr_kolektora):
+        self.bocik.wykryj_i_kliknij_skylabu(nr_kolektora)  # klikamy na wybrana rafinerie/kolektor
+        sleep(1)
+        self.bocik.wykryj_i_kliknij_skylabu(28)  # klikamy na przycisk wlaczania
+        self.czekaj(11,11,11)
+        if self.bocik.wykryj_i_kliknij_skylabu(29):  # odczytujemy potwierdzenie o wlaczeniu
+            self.wpis_do_raportu(f"Modul {self.bocik.daj_nazwe_obiektu(nr_kolektora)} zostal WlACZONY (ON) dla {login} ------ ####################")
+            self.stan_ulepszania_skylabu.append(1)
+            self.nazwy_ulepszanych_modulow.append(self.bocik.daj_nazwe_obiektu(nr_kolektora))
+        else:
+            self.wpis_do_raportu(f"### dla {login} nie wlaczono: {self.bocik.daj_nazwe_obiektu(nr_kolektora)} ###")
+            self.stan_ulepszania_skylabu.append(0)
+            self.nazwy_ulepszanych_modulow.append(self.bocik.daj_nazwe_obiektu(nr_kolektora))
+        sleep(1)
+        if self.klik_w_ok():
+            pass
+        else: self.bocik.wykryj_i_kliknij(19)
+
         sleep(2)
 
     def robienie_porzadkow_z_ustawieniami(self):
@@ -188,6 +256,7 @@ class Kierownik():
         self.bocik.wykryj_i_kliknij(13)  # otwieranie skylabu
         sleep(5)
         self.bocik.wykryj_i_kliknij_skylabu(22)
+        sleep(3)
 
     def odebranie_surek(self):
         sleep(2)
@@ -199,29 +268,30 @@ class Kierownik():
 
 
     def wlonczanie_gry_do_mapy(self):
-        sleep(3)
+        sleep(1)
         self.bocik.wykryj_i_kliknij(15)  # start mapy gry
-        self.czekaj(15,10,5) #czekaj az pojawi sie przycisk startu lub odbioru
-        self.bocik.wykryj_i_kliknij(15)  # klik na ikone start mapy gry
-        self.bocik.wykryj_i_kliknij(10)  # klik na ikone odbierz
+        self.czekaj(15,10,5) #czekaj az pojawi sie przycisk startu lub odbioru lub napis minimapy
+        if self.bocik.wykryj_i_kliknij(15):  # klik na ikone start mapy gry
+            pass
+        else: self.bocik.wykryj_i_kliknij(10)  # klik na ikone odbierz
         self.czekaj(5,5,5)#czekaj az pojawi sie napis minimapy
-        sleep(3)
+        sleep(1)
 
     def autopozycjonowanie_do_bazy_handlu_surkami(self):
-        sleep(2)
+        sleep(1)
         self.bocik.WLACZ_POZYCJONOWANIE_MAPY = True
         self.bocik.wykryj_i_kliknij(5)  # pozycjonowanie mapy i ruszanie statkiem do bazy
         self.bocik.WLACZ_POZYCJONOWANIE_MAPY = False
-        sleep(2)
+
 
     def sprzedaz_surek(self):
         self.bocik.wykryj_i_kliknij(3)  # wlaczamy handel surkami
 
-        sleep(3)
+        self.czekaj(6,6,6)
         self.bocik.WLACZ_HANDEL = True  # rozpoczynamy sekwencje handlowa
         self.bocik.wykryj_i_kliknij(6)  # zdjecie odniesienia
         self.bocik.WLACZ_HANDEL = False  # koniec sekwencje handlowaj
-        sleep(3)
+        sleep(1)
 
 
 
@@ -340,5 +410,41 @@ class Kierownik():
     def wybudzanie(self):
         self.bocik.wybudz()
 
+    def czas(self,czas):
+        now = datetime.now()
+        print(now)
+        czas = czas.strftime("%H:%M:%S")
+        aktualny_czas = now.strftime("%H:%M:%S")
+        print(aktualny_czas)
+        five_hour = timedelta(hours=6)
+        new = czas + five_hour
+        nowy_czas = new.strftime("%H:%M:%S")
+        print(nowy_czas)
+
+    def wyplac_hajs(self,liczba_statkow,numer_statku ,ilosc_kredytow):
+
+        for x in range(liczba_statkow):
+            x = x + numer_statku
+            self.bocik.wyplata(x ,ilosc_kredytow)
+            sleep(2)
+            self.bocik.wykryj_i_kliknij_skylabu(23)
+            sleep(2)
 
 
+    def wyplac_hajsownikom(self,ilosc_statkow, numer_statku, ilosc_kredytow):
+        for x in range(ilosc_statkow):
+            x = x + numer_statku
+
+
+            self.czekaj(15,13,15)
+            if self.bocik.wykryj_i_kliknij_skylabu(24):
+                self.prewencja_przed_wyskakujacymi_oknami("zamykanie_okna")
+                self.robocza_wspolrzedna_x =  self.bocik.screen_x_hajs
+                self.robocza_wspolrzedna_y = self.bocik.screen_y_hajs
+                sleep(2)
+                self.bocik.wykryj_i_kliknij_skylabu(23)
+                sleep(1)
+                self.bocik.wyplata2(self.robocza_wspolrzedna_x, self.robocza_wspolrzedna_y,x, ilosc_kredytow)
+                sleep(2)
+                self.bocik.wykryj_i_kliknij_skylabu(23)
+            else: print("ni ma wyplaty")
