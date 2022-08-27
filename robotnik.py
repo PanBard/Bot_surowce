@@ -19,9 +19,12 @@ class Robotnik:
     window_offset = (0, 0)
     WLACZ_HANDEL = False
     WLACZ_POZYCJONOWANIE_MAPY = False
+
     WYSYLANIE_SUREK_PROMERIUM = False
     WYSYLANIE_SUREK_DUR_i_PROMETID = False
     WYSYLANIE_SUREK_TERB_END_PROM = False
+    WYSYLANIE_SUREK_DUR_i_PRD_i_PROMERIUM= False
+
     WLACZ_USTAWIANIE_USTAWIEN = False
     analizowany_zrzut_ekranu = None
     ilosc_PROMERIUM = None
@@ -223,6 +226,7 @@ class Robotnik:
                 sleep(0.5)
                 pyautogui.press('tab') #seprom
 
+
             if self.WYSYLANIE_SUREK_DUR_i_PROMETID:
                 sleep(1)
                 pyautogui.press('tab')
@@ -238,6 +242,26 @@ class Robotnik:
                 sleep(0.5)
                 pyautogui.press('tab') # xeno
                 pyautogui.press('tab') # promerium
+                pyautogui.press('tab') #seprom
+
+            if self.WYSYLANIE_SUREK_DUR_i_PRD_i_PROMERIUM:
+                sleep(1)
+                pyautogui.press('tab')
+                pyautogui.press('tab')
+                pyautogui.press('tab')
+                pyautogui.press('tab') #prometid
+                sleep(0.5)
+                pyautogui.write(self.ilosc_prometid)
+                sleep(0.5)
+                pyautogui.press('tab') #duranium
+                sleep(0.5)
+                pyautogui.write(self.ilosc_duranium)
+                sleep(0.5)
+                pyautogui.press('tab') # xeno
+                pyautogui.press('tab') # promerium
+                sleep(0.5)
+                pyautogui.write(self.ilosc_PROMERIUM)
+                sleep(0.5)
                 pyautogui.press('tab') #seprom
 
             if self.WYSYLANIE_SUREK_TERB_END_PROM:

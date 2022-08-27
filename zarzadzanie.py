@@ -12,6 +12,8 @@ class Kierownik():
     stan_ulepszania_skylabu = []
     nazwy_ulepszanych_modulow =[]
 
+    czas_poczatku_sekwencji =None
+
     robocza_wspolrzedna_x = None
     robocza_wspolrzedna_y = None
 
@@ -65,18 +67,21 @@ class Kierownik():
         # self.wylaczenie_rafinerii_kolektora(login,19) #wylonczanie prometidu
         # self.wylaczenie_rafinerii_kolektora(login, 17)  # wylonczanie duranium
 
+
+        self.ulepszenie_rafinerii_kolektora(login, 3)  # kolektor terbium
+        self.ulepszenie_rafinerii_kolektora(login, 1)  # kolektor endurium
+        self.ulepszenie_rafinerii_kolektora(login, 2)  # kolektor prometrium
+        #
+
+        #
+        self.ulepszenie_rafinerii_kolektora(login,19) #rafineria prometidu
+        self.ulepszenie_rafinerii_kolektora(login,17) #rafineria duranium
+        self.ulepszenie_rafinerii_kolektora(login, 26)  # rafineria promerium
+        self.ulepszenie_rafinerii_kolektora(login, 27)  # modul xeno
+
         self.ulepszenie_rafinerii_kolektora(login,5) #modul podstawowy
         self.ulepszenie_rafinerii_kolektora(login,6) #modul sloneczny
         self.ulepszenie_rafinerii_kolektora(login, 4)  # modul magazynowy
-        #
-        # self.ulepszenie_rafinerii_kolektora(login, 1)  # kolektor endurium
-        # self.ulepszenie_rafinerii_kolektora(login, 2)  # kolektor prometrium
-        # self.ulepszenie_rafinerii_kolektora(login, 3)  # kolektor terbium
-        #
-        # self.ulepszenie_rafinerii_kolektora(login,19) #rafineria prometidu
-        # self.ulepszenie_rafinerii_kolektora(login,17) #rafineria duranium
-        # self.ulepszenie_rafinerii_kolektora(login, 26)  # rafineria promerium
-        # self.ulepszenie_rafinerii_kolektora(login, 27)  # modul xeno
 
         self.zapisz_skrina_o_stanie_skylabu(login)
         self.wylonczanie_darkorbit()
@@ -115,7 +120,7 @@ class Kierownik():
             else: sleep(0.5)
 
             if time()-czas >= 120:
-                self.wpis_do_raportu("Przerwano procedure czekania bo nie znaleziono obiektu")
+                self.wpis_do_raportu("Przerwano procedure czekania bo nie znaleziono obiektu (uplynol czas czekania:  2 minuty)")
                 break
         sleep(2)
 
@@ -144,6 +149,7 @@ class Kierownik():
         sleep(1)
         self.bocik.wykryj_i_kliknij_skylabu(7)  # klikamy na przycisk buduj
         self.czekaj(11,11,15)# czeka na przycisk ok lub przycisk startu
+        sleep(2)
         if self.bocik.wykryj_i_kliknij_skylabu(8):  # odczytujemy potwierdzenie o modernizacji
             self.wpis_do_raportu(f"Modul {self.bocik.daj_nazwe_obiektu(nr_kolektora)} zostal ulepszony dla {login} ------ ####################")
             self.stan_ulepszania_skylabu.append(1)
@@ -330,6 +336,16 @@ class Kierownik():
             self.bocik.WYSYLANIE_SUREK_TERB_END_PROM = False
             sleep(2)
 
+        if rodzaj_surek == "dur_i_prd_i_promerium":
+            sleep(2)
+            ilosc_surek_str = str(ilosc_surek)
+            self.bocik.ilosc_duranium = ilosc_surek_str
+            self.bocik.ilosc_prometid = ilosc_surek_str
+            self.bocik.ilosc_PROMERIUM = ilosc_surek_str
+            self.bocik.WYSYLANIE_SUREK_DUR_i_PRD_i_PROMERIUM = True  # sekwencja wpisywania i wysylania surek
+            self.bocik.wykryj_i_kliknij(8)  # otwieranie modulu transportowego
+            self.bocik.WYSYLANIE_SUREK_DUR_i_PRD_i_PROMERIUM = False
+
         self.bocik.wykryj_i_kliknij(17)  # klik na przycisk wysylania surek
         sleep(5)
         self.prewencja_przed_wyskakujacymi_oknami("zamykanie_okna")
@@ -349,9 +365,10 @@ class Kierownik():
 
 
 
+
     def napisz_sprawozdanie(self, login, rodzaj_surek, ilosc_surek):
         if self.stan_misji == True:
-            if self.ilosc_surek == 1500 or self.ilosc_surek == 3000:
+            if self.ilosc_surek == 1500 or self.ilosc_surek == 3000 or self.ilosc_surek==1000:
                 now = datetime.now()
                 aktualny_czas = now.strftime("%H:%M:%S")
                 five_hour = timedelta(hours=6)
@@ -363,7 +380,7 @@ class Kierownik():
                 self.stan_misji = None
                 self.ilosc_surek = None
 
-            if self.ilosc_surek ==750  or self.ilosc_surek==500:
+            if self.ilosc_surek ==750  or self.ilosc_surek==500 :
                 now = datetime.now()
                 aktualny_czas = now.strftime("%H:%M:%S")
                 five_hour = timedelta(hours=3)
@@ -398,6 +415,76 @@ class Kierownik():
         with open("Raport.txt", "a") as text_file:
             text_file.writelines(f"-[{aktualny_czas}]- " + f"Rozpoczecie nastepnej sekwencji dla {login} o godzinie: "+ f"##################### {nowy_czas} ###################" + '\n')
 
+
+
+    def wpis_do_sprawozdania_informacji_o_godzinie_wybudzenia(self, sekundy,czas_konca_sekwencji,roznica_sekundach):
+        now = datetime.now()
+        aktualny_czas = now.strftime("%H:%M:%S")
+
+        czas_rozpoczecia = self.czas_poczatku_sekwencji.strftime("%H:%M:%S")
+        czas_konca_sekwencjii = czas_konca_sekwencji.strftime("%H:%M:%S")
+
+        six_hour = timedelta(hours=6)
+        czas_za_6_godzin = self.czas_poczatku_sekwencji + six_hour
+
+        roznica_w_minutach = roznica_sekundach / 60
+        reszta_w_sekundach = roznica_sekundach % 60
+        with open("Sprawozdanie.txt", "a") as text_file:
+            text_file.writelines(
+                f"[{aktualny_czas}]- " +'\n'+f"Czas rozpoczecia sekwencji zarabiania: {czas_rozpoczecia}s"+'\n'+f"Czas zakonczenia sekwencji zarabiania: {czas_konca_sekwencjii}s"+'\n'+ f"Roznica wynosi: {int(roznica_w_minutach)}min {int(reszta_w_sekundach)}s" +'\n' +f"~~~~~~~~~~~~~~Okres uspienia zakonczy sie po: {sekundy} sekundach, czyli o godzinie: {czas_za_6_godzin}~~~~~~" + '\n' + '\n')
+
+    def daj_aktualna_godzine(self):
+        self.czas_poczatku_sekwencji = datetime.now()
+        aktualny_czas = time()
+
+        return  aktualny_czas
+
+    def daj_liczbe_sekund_do_spania(self, czas_rozpoczecia):
+        aktualny_czas = time()
+        czas_konca_sekwencji = datetime.now()
+        roznica = aktualny_czas - czas_rozpoczecia
+        szesc_godzin = 6*3600
+        godzina_wybudzenia = czas_rozpoczecia +szesc_godzin
+        czas_przerwy = szesc_godzin - roznica
+        czas_przerwy = czas_przerwy + 60
+        self.wpis_do_sprawozdania_informacji_o_godzinie_wybudzenia(czas_przerwy,czas_konca_sekwencji,roznica)
+        return czas_przerwy
+
+    def zapisanie_godziny_wybudzenia(self):
+        czas = time()
+        czas_z_6_godzinami = czas + (3600*6)
+
+        now = datetime.now()
+        six_hour = timedelta(hours=6)
+        czas_za_6_godzin = now + six_hour
+        czas_za_6_godzin = czas_za_6_godzin.strftime("%H:%M:%S")
+
+        with open("godzina_wybudzenia.txt", "w") as text_file:
+            text_file.writelines(f"{czas_z_6_godzinami}" +'\n' + f"{czas_za_6_godzin}")
+
+    def spij_odliczone_sekundy(self):
+        plik_txt = open('godzina_wybudzenia.txt')
+        godzina_przeznaczenia = plik_txt.readlines()
+        plik_txt.close()
+
+        godzina_konca_spania = godzina_przeznaczenia[1]
+        godzina_przeznaczenia = float(godzina_przeznaczenia[0].rstrip('\n'))
+        terazniejsza_godzina = time()
+        sekundy_pozostale_do_spania = godzina_przeznaczenia - terazniejsza_godzina
+        self.wpis_do_raportu(f"~~~~~~~~~~~~~~~~~~Wybudzenie po: {sekundy_pozostale_do_spania}s")
+        now = datetime.now()
+        aktualny_czas = now.strftime("%H:%M:%S")
+
+
+
+        print( f"Rozpoczecie czekania o godzinie: {aktualny_czas}" +'\n'+ f"Zakonczenie czekania o godzinie: {godzina_konca_spania} "+'\n'+ f"Czas pozostaly do spania: {sekundy_pozostale_do_spania/3600} godz.")
+
+
+        if sekundy_pozostale_do_spania > 0:
+            sleep(sekundy_pozostale_do_spania)
+        else: print("JAZDA BO JUZ CZAS!!!!!!!!!!!!!")
+
+        print(f"spie se: {sekundy_pozostale_do_spania} sekund")
     def wylonczanie_darkorbit(self):
         sleep(2)
         self.bocik.wylaczanie_darkorbit()

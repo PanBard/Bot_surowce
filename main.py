@@ -12,11 +12,11 @@ kierownik = Kierownik()
 
 # kierownik.rozpocznij_sekwencje_ulepszania_skylabu_itp("SpokDre") # goliat+ ladownia             #2
 # kierownik.rozpocznij_sekwencje_ulepszania_skylabu_itp("RyszardLipton")# goliat+ ladownia          #3
-# kierownik.rozpocznij_sekwencje_ulepszania_skylabu_itp("DoktorKostek")# goliat+ ladownia          #4
-# kierownik.rozpocznij_sekwencje_ulepszania_skylabu_itp("Smiesznystworek")# goliat+ ladownia          #5
+# # kierownik.rozpocznij_sekwencje_ulepszania_skylabu_itp("DoktorKostek")# goliat+ ladownia          #4
+# # kierownik.rozpocznij_sekwencje_ulepszania_skylabu_itp("Smiesznystworek")# goliat+ ladownia          #5
 # kierownik.rozpocznij_sekwencje_ulepszania_skylabu_itp("kuciaki")# goliat+ ladownia          #6
 # kierownik.rozpocznij_sekwencje_ulepszania_skylabu_itp("miedzygalaktyczny")# goliat+ ladownia           #7
-# kierownik.rozpocznij_sekwencje_ulepszania_skylabu_itp("KapitanstatkU") #goliat + ladownia           #8
+# # kierownik.rozpocznij_sekwencje_ulepszania_skylabu_itp("KapitanstatkU") #goliat + ladownia           #8
 # kierownik.rozpocznij_sekwencje_ulepszania_skylabu_itp("zultePudelko12") #goliat + ladownia           #9
 # kierownik.rozpocznij_sekwencje_ulepszania_skylabu_itp("bajkiDisneja")#goliat           #10
 # kierownik.rozpocznij_sekwencje_ulepszania_skylabu_itp("SZkocik") #goliat           #11
@@ -33,9 +33,9 @@ kierownik = Kierownik()
 
 
 
-#
 
-# kierownik.czas("12:43:10")
+
+
 
 # ###### wyplata###############
 #
@@ -45,45 +45,41 @@ kierownik = Kierownik()
 
 
 
-
-
-
-
-
-
-godziny = 0
-
+################### w razie przerwania cyklu #######################
+# kierownik.spij_odliczone_sekundy()
+# kierownik.wybudzanie()
 
 while True:
-    print("spie")
-    kierownik.spij_do_nadejscia_czasu_przeznaczenia(godziny)
-    kierownik.wybudzanie()
-    print("wybudzony")
     kierownik.rozpocznij_sekwencje_zarabiania("KONSOLETA", rodzaj_surek="promerium", ilosc_surek=3000)
-    kierownik.rozpocznij_sekwencje_zarabiania("SpokDre", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("RyszardLipton", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("DoktorKostek", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("Smiesznystworek", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("kuciaki", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("miedzygalaktyczny", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("KapitanstatkU", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("zultePudelko12", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("bajkiDisneja", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("SZkocik", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("takEJ", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("dyskotekowapl", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("diskopol", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("napakerze", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("margarettaczer", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("czadowich", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("morzadno", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("aktotoprzyszedl", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("enterprajsxd", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
-    kierownik.rozpocznij_sekwencje_zarabiania("gieniabagie", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
+    czas_rozpoczecia = kierownik.daj_aktualna_godzine()
+    kierownik.zapisanie_godziny_wybudzenia()
+    kierownik.rozpocznij_sekwencje_zarabiania("SpokDre", rodzaj_surek="promerium", ilosc_surek=2000)
+    kierownik.rozpocznij_sekwencje_zarabiania("RyszardLipton", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("DoktorKostek", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)#
+    kierownik.rozpocznij_sekwencje_zarabiania("Smiesznystworek", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)#
+    kierownik.rozpocznij_sekwencje_zarabiania("kuciaki",rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("miedzygalaktyczny", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("KapitanstatkU", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("zultePudelko12",rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("bajkiDisneja", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("SZkocik", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("takEJ", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("dyskotekowapl", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("diskopol", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("napakerze", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("margarettaczer", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("czadowich", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("morzadno", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("aktotoprzyszedl", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("enterprajsxd", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    kierownik.rozpocznij_sekwencje_zarabiania("gieniabagie", rodzaj_surek="dur_i_prd_i_promerium", ilosc_surek=1000)
+    # kierownik.rozpocznij_sekwencje_zarabiania("gieniabagie", rodzaj_surek="dur_i_prom", ilosc_surek=1500)
 
+    czas_przerwy = kierownik.daj_liczbe_sekund_do_spania(czas_rozpoczecia)
+    print(f"Czas spanka wynosi: {czas_przerwy}")
+    sleep(czas_przerwy)
+    kierownik.wybudzanie()
 
-    # # nob = True
-    godziny = 5.2
 
 
 
