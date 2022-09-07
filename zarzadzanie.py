@@ -37,6 +37,7 @@ class Kierownik():
         self.czekaj(3,3,3)#czekaj az pojawi sie przycisk handlu surkami
         self.sprzedaz_surek()
         self.wysylanie_surek(rodzaj_surek, ilosc_surek)
+
         self.wylonczanie_darkorbit()
         self.wpis_do_raportu(f"Zakonczono sekwencje - {login}")
         self.wypisz_do_raportu_godzine_przeznaczenia(login)
@@ -53,11 +54,12 @@ class Kierownik():
         self.czekaj(18,15,5) #czekaj az pojawi sie przycisk zamkniecia okna lub startu lub ikona minimapy
         self.prewencja_przed_wyskakujacymi_oknami("zamykanie_okna")
         self.sprawdzanie_skylabu_czy_skonczony_proces()
+        self.czekaj(20,11,18)#czekaj az pojawi sie przycisk napisu promerium(w skylabie), przycisku ok lub zamkniecia okna
 
         # self.ulepszenie_rafinerii_kolektora(login,20) #wlonczanie pierwszy raz prometidu
         # self.ulepszenie_rafinerii_kolektora(login,18) #wlonczanie pierwszy raz duranium
-        # self.ulepszenie_rafinerii_kolektora(login, 11)  # wlonczanie pierwszy raz promerium
-        # self.ulepszenie_rafinerii_kolektora(login, 10)  # wlonczanie pierwszy raz xeno
+        # self.ulepszenie_rafinerii_kolektora(login,11) #wlonczanie pierwszy raz promerium
+        # self.ulepszenie_rafinerii_kolektora(login,10) #wlonczanie pierwszy raz xeno
 
         # self.wlaczenie_rafinerii_kolektora(login,30) # wznowienieraf promerium
         # self.wlaczenie_rafinerii_kolektora(login,31) # wznowienieraf prometidu
@@ -65,23 +67,20 @@ class Kierownik():
 
         # self.wylaczenie_rafinerii_kolektora(login,26) #wylonczanie promerium
         # self.wylaczenie_rafinerii_kolektora(login,19) #wylonczanie prometidu
-        # self.wylaczenie_rafinerii_kolektora(login, 17)  # wylonczanie duranium
+        # self.wylaczenie_rafinerii_kolektora(login, 17) #wylonczanie duranium
 
+        # self.ulepszenie_rafinerii_kolektora(login, 3)  #kolektor terbium
+        # self.ulepszenie_rafinerii_kolektora(login, 1)  #kolektor endurium
+        # self.ulepszenie_rafinerii_kolektora(login, 2)  #kolektor prometrium
 
-        self.ulepszenie_rafinerii_kolektora(login, 3)  # kolektor terbium
-        self.ulepszenie_rafinerii_kolektora(login, 1)  # kolektor endurium
-        self.ulepszenie_rafinerii_kolektora(login, 2)  # kolektor prometrium
-        #
+        # self.ulepszenie_rafinerii_kolektora(login, 26)  # rafineria promerium
+        # self.ulepszenie_rafinerii_kolektora(login, 27)  # modul xeno
+        # self.ulepszenie_rafinerii_kolektora(login,19) #rafineria prometidu
+        # self.ulepszenie_rafinerii_kolektora(login,17) #rafineria duranium
 
-        #
-        self.ulepszenie_rafinerii_kolektora(login,19) #rafineria prometidu
-        self.ulepszenie_rafinerii_kolektora(login,17) #rafineria duranium
-        self.ulepszenie_rafinerii_kolektora(login, 26)  # rafineria promerium
-        self.ulepszenie_rafinerii_kolektora(login, 27)  # modul xeno
-
-        self.ulepszenie_rafinerii_kolektora(login,5) #modul podstawowy
-        self.ulepszenie_rafinerii_kolektora(login,6) #modul sloneczny
-        self.ulepszenie_rafinerii_kolektora(login, 4)  # modul magazynowy
+        # self.ulepszenie_rafinerii_kolektora(login,5) #modul podstawowy
+        # self.ulepszenie_rafinerii_kolektora(login,6) #modul sloneczny
+        # self.ulepszenie_rafinerii_kolektora(login, 4)  # modul magazynowy
 
         self.zapisz_skrina_o_stanie_skylabu(login)
         self.wylonczanie_darkorbit()
@@ -121,6 +120,7 @@ class Kierownik():
 
             if time()-czas >= 120:
                 self.wpis_do_raportu("Przerwano procedure czekania bo nie znaleziono obiektu (uplynol czas czekania:  2 minuty)")
+                self.zapisz_skrina_o_stanie_skylabu("SKIRN_BO_NIC_NIE_WYKRYTO")
                 break
         sleep(2)
 
@@ -267,7 +267,7 @@ class Kierownik():
     def odebranie_surek(self):
         sleep(2)
         self.bocik.wykryj_i_kliknij(13)  # otwieranie skylabu
-        sleep(5)
+        self.czekaj(20,11,18)#czekaj az pojawi sie przycisk napisu promerium(w skylabie), przycisku ok lub zamkniecia okna
         if self.bocik.wykryj_i_kliknij(12) : # sprawdzenie czy transfer sie zakonczyl
             sleep(5)
         else: self.bocik.wykryj_i_kliknij(11) # klika na przycisk ok
@@ -347,7 +347,8 @@ class Kierownik():
             self.bocik.WYSYLANIE_SUREK_DUR_i_PRD_i_PROMERIUM = False
 
         self.bocik.wykryj_i_kliknij(17)  # klik na przycisk wysylania surek
-        sleep(5)
+
+        self.czekaj(11,11,11) #czekaj az pojawi sie  przycisk ok
         self.prewencja_przed_wyskakujacymi_oknami("zamykanie_okna")
         if self.bocik.wykryj_i_kliknij(9):  # odczytujemy potwierdzenie o wysylanych surkach
             self.wpis_do_raportu(f"################# ----- SUROWCE ZOSTALY WYSLANE dla {self.login} ------ ####################")
@@ -376,7 +377,7 @@ class Kierownik():
                 nowy_czas = new.strftime("%H:%M:%S")
                 ilosc_surek = str(ilosc_surek)
                 with open("Sprawozdanie.txt", "a") as text_file:
-                    text_file.writelines(f"[{aktualny_czas}]- " + f"Misja dla statku {login} zakonczona POWODZENIEM" + '\n' + "Godzina wyznaczona dla nastepnej misji: ---"+ f"{nowy_czas}" + '\n' + "Ladunek: :" + f"{rodzaj_surek} w ilosci: " +f"{ilosc_surek} jednostek"  + '\n'  + '\n'  + '\n' )
+                    text_file.writelines(f"[{aktualny_czas}]- " + f"Misja dla statku {login} zakonczona POWODZENIEM" + '\n' + "Godzina wyznaczona dla nastepnej misji: ---"+ f"{nowy_czas}" + '\n' + "Ladunek " + f"{rodzaj_surek} w ilosci: " +f"{ilosc_surek} jednostek."  + '\n'  + '\n'  + '\n' )
                 self.stan_misji = None
                 self.ilosc_surek = None
 
@@ -402,7 +403,7 @@ class Kierownik():
             ilosc_surek = str(ilosc_surek)
             with open("Sprawozdanie.txt", "a") as text_file:
                 text_file.writelines(
-                    f"[{aktualny_czas}]- " + f"Misja dla statku {login} zakonczona NIEPOWODZENIEM !!!!!!!" + '\n'  + '\n'  + '\n')
+                    f"[{aktualny_czas}]- " + f"!!!!!!!!!!!!!!!!!!!!!!!!!!! Misja dla statku {login} zakonczona NIEPOWODZENIEM !!!!!!!!!!!!!!!!!!!" + '\n'  + '\n'  + '\n')
             self.stan_misji = None
             self.ilosc_surek = None
 
@@ -430,8 +431,7 @@ class Kierownik():
         roznica_w_minutach = roznica_sekundach / 60
         reszta_w_sekundach = roznica_sekundach % 60
         with open("Sprawozdanie.txt", "a") as text_file:
-            text_file.writelines(
-                f"[{aktualny_czas}]- " +'\n'+f"Czas rozpoczecia sekwencji zarabiania: {czas_rozpoczecia}s"+'\n'+f"Czas zakonczenia sekwencji zarabiania: {czas_konca_sekwencjii}s"+'\n'+ f"Roznica wynosi: {int(roznica_w_minutach)}min {int(reszta_w_sekundach)}s" +'\n' +f"~~~~~~~~~~~~~~Okres uspienia zakonczy sie po: {sekundy} sekundach, czyli o godzinie: {czas_za_6_godzin}~~~~~~" + '\n' + '\n')
+            text_file.writelines("~~~~~~~~~~~~~~"+'\n'+f"[{aktualny_czas}]- " +'\n'+f"Czas rozpoczecia sekwencji zarabiania: {czas_rozpoczecia}s"+'\n'+f"Czas zakonczenia sekwencji zarabiania: {czas_konca_sekwencjii}s"+'\n'+ f"Czas sekwencji handlowej wyniosl: {int(roznica_w_minutach)}min {int(reszta_w_sekundach)}s" +'\n' +f"Okres uspienia zakonczy sie po: {sekundy} sekundach, czyli o godzinie: {czas_za_6_godzin}~~~~~~" + '\n' +"~~~~~~~~~~~~~~" + '\n'+ '\n')
 
     def daj_aktualna_godzine(self):
         self.czas_poczatku_sekwencji = datetime.now()
@@ -439,7 +439,7 @@ class Kierownik():
 
         return  aktualny_czas
 
-    def daj_liczbe_sekund_do_spania(self, czas_rozpoczecia):
+    def zapisz_sprawozdanie_czasowe(self, czas_rozpoczecia):
         aktualny_czas = time()
         czas_konca_sekwencji = datetime.now()
         roznica = aktualny_czas - czas_rozpoczecia
@@ -448,7 +448,7 @@ class Kierownik():
         czas_przerwy = szesc_godzin - roznica
         czas_przerwy = czas_przerwy + 60
         self.wpis_do_sprawozdania_informacji_o_godzinie_wybudzenia(czas_przerwy,czas_konca_sekwencji,roznica)
-        return czas_przerwy
+
 
     def zapisanie_godziny_wybudzenia(self):
         czas = time()
@@ -477,14 +477,14 @@ class Kierownik():
 
 
 
-        print( f"Rozpoczecie czekania o godzinie: {aktualny_czas}" +'\n'+ f"Zakonczenie czekania o godzinie: {godzina_konca_spania} "+'\n'+ f"Czas pozostaly do spania: {sekundy_pozostale_do_spania/3600} godz.")
+        print( f"Rozpoczecie czekania o godzinie: {aktualny_czas}" +'\n'+ f"Zakonczenie czekania o godzinie: {godzina_konca_spania} "+'\n'+ f"Czekanie zostanie zakonczone po uplywie: {int(sekundy_pozostale_do_spania/3600)} godzin {int((sekundy_pozostale_do_spania%3600)/60)} minut i {int((sekundy_pozostale_do_spania%3600)%60)} sekund")
 
 
         if sekundy_pozostale_do_spania > 0:
             sleep(sekundy_pozostale_do_spania)
         else: print("JAZDA BO JUZ CZAS!!!!!!!!!!!!!")
 
-        print(f"spie se: {sekundy_pozostale_do_spania} sekund")
+
     def wylonczanie_darkorbit(self):
         sleep(2)
         self.bocik.wylaczanie_darkorbit()
@@ -508,14 +508,6 @@ class Kierownik():
         nowy_czas = new.strftime("%H:%M:%S")
         print(nowy_czas)
 
-    def wyplac_hajs(self,liczba_statkow,numer_statku ,ilosc_kredytow):
-
-        for x in range(liczba_statkow):
-            x = x + numer_statku
-            self.bocik.wyplata(x ,ilosc_kredytow)
-            sleep(2)
-            self.bocik.wykryj_i_kliknij_skylabu(23)
-            sleep(2)
 
 
     def wyplac_hajsownikom(self,ilosc_statkow, numer_statku, ilosc_kredytow):
@@ -535,3 +527,31 @@ class Kierownik():
                 sleep(2)
                 self.bocik.wykryj_i_kliknij_skylabu(23)
             else: print("ni ma wyplaty")
+
+
+    # def zakladanie_nowego_konta_darkorbit(self): #trzeba dac plik txt z pasami
+    #     plik_txt = open('pasy.txt')
+    #     pasy = plik_txt.readlines()         #robimy tablice z pasami z pliku txt
+    #     plik_txt.close()
+    #
+    #     liczba_kont = int(len(pasy) / 2) #bierzemy liczbe kont do petli for
+    #
+    #     nr_loginu=0 #zmienne z poczatkowymi wartosciami do wczytywania pasow w petli for
+    #     nr_hasla=1
+    #     nr_mailu =2
+    #
+    #
+    #     for x in range(liczba_kont):
+    #
+    #
+    #         print("Loggin: ",pasy[nr_loginu].rstrip('\n'))
+    #         print("Haslo: ", pasy[nr_hasla].rstrip('\n'))
+    #         print("Mail: ", pasy[nr_mailu].rstrip('\n'))
+    #         # print(nr_loginu)
+    #         # print(nr_hasla)
+    #         nr_loginu = nr_loginu + 3
+    #         nr_hasla = nr_hasla + 3
+    #         nr_mailu = nr_mailu + 3
+    #         # if (nr_loginu % 2) == 0:
+    #         #     nr_loginu = nr_loginu+2
+    #         # else: print("liczba nieparzysta")

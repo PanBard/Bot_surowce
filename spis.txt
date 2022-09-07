@@ -1,3 +1,4 @@
-0 prometid: Point(x=1247, y=443)
-1 duranium: Point(x=1236, y=439)
-0 prometid: Point(x=1502, y=48)
+0 prometid: Point(x=753, y=202)
+1 duranium: Point(x=753, y=202)
+0 prometid: Point(x=776, y=226)
+1 duranium: Point(x=776, y=226)

@@ -18,3 +18,4 @@ przycisku_zgody_prywatnosci.JPG
 wysylania_surowcow.JPG
 zamkniecia_okna.JPG
 zamkniecia_okna2.JPG
+promerium_obraz_odniesienia.JPG

@@ -299,8 +299,8 @@ class Robotnik:
             with open("Raport.txt", "a") as text_file:
                 text_file.writelines( f"-[{aktualny_czas}]- "+"Nie znaleziono obiektu z pozycji: " + obiekt.rstrip('.JPG') + '\n')
 
-            if numer_celu != self.numer_celu_do_skrina:
-                cv.imwrite(f'skriny/{obiekt2, time()}.jpg', self.analizowany_zrzut_ekranu) #zapisanie skrina
+            # if numer_celu != self.numer_celu_do_skrina:
+            #     cv.imwrite(f'skriny/{obiekt2, time()}.jpg', self.analizowany_zrzut_ekranu) #zapisanie skrina
 
             self.numer_celu_do_skrina = numer_celu
             self.screen_x = None
@@ -665,8 +665,8 @@ class Robotnik:
             with open("Raport.txt", "a") as text_file:
                 text_file.writelines( f"-[{aktualny_czas}]- "+"Nie znaleziono obiektu z pozycji: " + obiekt.rstrip('.jpg') + '\n')
 
-            if numer_celu != self.numer_celu_do_skrina:
-                cv.imwrite(f'skriny/{obiekt2, time()}.jpg', self.analizowany_zrzut_ekranu) #zapisanie skrina
+            # if numer_celu != self.numer_celu_do_skrina:
+            #     cv.imwrite(f'skriny/{obiekt2, time()}.jpg', self.analizowany_zrzut_ekranu) #zapisanie skrina
 
             self.numer_celu_do_skrina = numer_celu
             self.screen_x = None
@@ -721,28 +721,18 @@ class Robotnik:
         self.analizowany_zrzut_ekranu = np.ascontiguousarray(img)
 
 
-        cv.imwrite(f'stan_skylab/{login, time()}.jpg', self.analizowany_zrzut_ekranu)  # zapisanie skrina
+
+
+        if login == "SKIRN_BO_NIC_NIE_WYKRYTO":
+            cv.imwrite(f'skriny/{login, time()}.jpg', self.analizowany_zrzut_ekranu)  # zapisanie skrina do skrina
+        else: cv.imwrite(f'stan_skylab/{login, time()}.jpg', self.analizowany_zrzut_ekranu)  # zapisanie skrina
 
     def daj_nazwe_obiektu(self, numer_celu):
         obiekt = self.nazwa_celu2[numer_celu].rstrip('\n')
         obiekt = obiekt.rstrip('.jpg')
         return obiekt
 
-    def wyplata(self,numer_statku ,ilosc_kredytow):
 
-        ilosc_kredytow_str = str(ilosc_kredytow)
-        pyautogui.press('tab', presses=25) #tabela wyboru
-        pyautogui.press('enter')
-        pyautogui.press('down', presses=numer_statku) # wybieramy statek
-        pyautogui.press('enter')
-        sleep(0.5)
-        pyautogui.press('tab', presses=10)
-        pyautogui.press('tab', presses=10)
-        pyautogui.press('tab', presses=10)
-        pyautogui.press('tab', presses=13)
-        pyautogui.write(ilosc_kredytow_str)
-        pyautogui.press('tab', presses=3)
-        pyautogui.press('enter')
 
     def wyplata2(self,wspolrzedna_x ,wspolrzedna_y, pozycja_statku, ilosc_kredytow):
         ilosc_kredytow_str = str(ilosc_kredytow)
