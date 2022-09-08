@@ -1,15 +1,226 @@
-[09:05:49]- Misja dla statku KONSOLETA zakonczona POWODZENIEM
-Godzina wyznaczona dla nastepnej misji: ---15:05:49
+[01:33:31]- Misja dla statku KONSOLETA zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---07:33:31
 Ladunek promerium w ilosci: 3000 jednostek.
 
 
+[01:36:09]- Misja dla statku SpokDre zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---07:36:09
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[01:38:41]- Misja dla statku RyszardLipton zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---07:38:41
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[01:41:13]- Misja dla statku DoktorKostek zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---07:41:13
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[01:43:52]- Misja dla statku Smiesznystworek zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---07:43:52
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[01:46:29]- Misja dla statku kuciaki zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---07:46:29
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[01:49:01]- Misja dla statku miedzygalaktyczny zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---07:49:01
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[01:51:37]- Misja dla statku KapitanstatkU zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---07:51:37
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[01:54:13]- Misja dla statku zultePudelko12 zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---07:54:13
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[01:56:49]- Misja dla statku bajkiDisneja zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---07:56:49
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[01:59:25]- Misja dla statku SZkocik zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---07:59:25
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[02:02:02]- Misja dla statku takEJ zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---08:02:02
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[02:04:37]- Misja dla statku dyskotekowapl zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---08:04:37
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[02:07:11]- Misja dla statku diskopol zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---08:07:11
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[02:09:47]- Misja dla statku napakerze zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---08:09:47
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[02:12:23]- Misja dla statku margarettaczer zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---08:12:23
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[02:14:59]- Misja dla statku czadowich zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---08:14:59
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[02:17:36]- Misja dla statku morzadno zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---08:17:36
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[02:20:11]- Misja dla statku aktotoprzyszedl zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---08:20:11
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[02:22:48]- Misja dla statku enterprajsxd zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---08:22:48
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[02:25:27]- Misja dla statku gieniabagie zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---08:25:27
+Ladunek promerium w ilosci: 3000 jednostek.
 
 
 ~~~~~~~~~~~~~~
-[09:56:31]- 
-Czas rozpoczecia sekwencji zarabiania: 09:05:49s
-Czas zakonczenia sekwencji zarabiania: 09:56:31s
-Czas sekwencji handlowej wyniosl: 50min 41s
-Okres uspienia zakonczy sie po: 18618.731020450592 sekundach, czyli o godzinie: 2022-09-07 15:05:49.980786~~~~~~
+[02:25:27]- 
+Czas rozpoczecia sekwencji zarabiania: 01:33:31s
+Czas zakonczenia sekwencji zarabiania: 02:25:27s
+Czas sekwencji handlowej wyniosl: 51min 55s
+Okres uspienia zakonczy sie po: 18544.308151245117 sekundach, czyli o godzinie: 2022-09-08 07:33:31.541111~~~~~~
+~~~~~~~~~~~~~~
+
+[09:06:06]- Misja dla statku KONSOLETA zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:06:06
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:08:45]- Misja dla statku SpokDre zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:08:45
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:11:28]- Misja dla statku RyszardLipton zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:11:28
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:14:05]- Misja dla statku DoktorKostek zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:14:05
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:16:44]- Misja dla statku Smiesznystworek zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:16:44
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:19:24]- Misja dla statku kuciaki zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:19:24
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:21:57]- Misja dla statku miedzygalaktyczny zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:21:57
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:24:36]- Misja dla statku KapitanstatkU zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:24:36
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:27:12]- Misja dla statku zultePudelko12 zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:27:12
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:29:51]- Misja dla statku bajkiDisneja zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:29:51
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:32:28]- Misja dla statku SZkocik zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:32:28
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:35:07]- Misja dla statku takEJ zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:35:07
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:37:44]- Misja dla statku dyskotekowapl zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:37:44
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:40:22]- Misja dla statku diskopol zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:40:22
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:43:00]- Misja dla statku napakerze zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:43:00
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:45:39]- Misja dla statku margarettaczer zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:45:39
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:48:19]- Misja dla statku czadowich zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:48:19
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:50:58]- Misja dla statku morzadno zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:50:58
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:53:35]- Misja dla statku aktotoprzyszedl zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:53:35
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:56:14]- Misja dla statku enterprajsxd zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:56:14
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+[09:58:51]- Misja dla statku gieniabagie zakonczona POWODZENIEM
+Godzina wyznaczona dla nastepnej misji: ---15:58:51
+Ladunek promerium w ilosci: 3000 jednostek.
+
+
+~~~~~~~~~~~~~~
+[09:58:51]- 
+Czas rozpoczecia sekwencji zarabiania: 09:06:06s
+Czas zakonczenia sekwencji zarabiania: 09:58:51s
+Czas sekwencji handlowej wyniosl: 52min 45s
+Okres uspienia zakonczy sie po: 18494.84642291069 sekundach, czyli o godzinie: 2022-09-08 15:06:06.138476~~~~~~
 ~~~~~~~~~~~~~~
 

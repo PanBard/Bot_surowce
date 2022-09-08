@@ -37,7 +37,6 @@ class Kierownik():
         self.czekaj(3,3,3)#czekaj az pojawi sie przycisk handlu surkami
         self.sprzedaz_surek()
         self.wysylanie_surek(rodzaj_surek, ilosc_surek)
-
         self.wylonczanie_darkorbit()
         self.wpis_do_raportu(f"Zakonczono sekwencje - {login}")
         self.wypisz_do_raportu_godzine_przeznaczenia(login)
@@ -90,20 +89,20 @@ class Kierownik():
 
 
 
-    # def sekwencja_pierwszego_logowania(self, login, haslo):
-    #     self.login = login
-    #     self.wlonczanie_darkorbit()
-    #     self.czekaj(2, 16,5)  # czekaj az pojawi sie przycisk logowania lub do zatwierdzenia prywatnosci lub ikona minimapy
-    #     self.prewencja_przed_wyskakujacymi_oknami("zgoda_prywatnosci")
-    #     self.logowanie_pierwszy_raz(login, haslo)
-    #     self.czekaj(18, 15, 18)  # czekaj az pojawi sie przycisk zamkniecia okna lub startu lub ikona minimapy
-    #     self.prewencja_przed_wyskakujacymi_oknami("zamykanie_okna")
-    # dorobic wchodzenie do skylabu (zeby juz se surki robily)
-    #     self.wlonczanie_gry_do_mapy()
-    #     self.czekaj(5, 5, 5)  # czekaj az pojawi sie przycisk minimapy
-    #     self.prewencja_przed_wyskakujacymi_oknami("zamykanie_okna")
-    #     self.klik_w_ok()
-    #     self.robienie_porzadkow_z_ustawieniami()
+    def sekwencja_pierwszego_logowania(self, login, haslo):
+        self.login = login
+        self.wlonczanie_darkorbit()
+        self.czekaj(2, 16,5)  # czekaj az pojawi sie przycisk logowania lub do zatwierdzenia prywatnosci lub ikona minimapy
+        self.prewencja_przed_wyskakujacymi_oknami("zgoda_prywatnosci")
+        self.logowanie_pierwszy_raz(login, haslo)
+        self.czekaj(18, 15, 18)  # czekaj az pojawi sie przycisk zamkniecia okna lub startu lub ikona minimapy
+        self.prewencja_przed_wyskakujacymi_oknami("zamykanie_okna")
+        self.odebranie_surek()
+        self.wlonczanie_gry_do_mapy()
+        self.czekaj(5, 5, 5)  # czekaj az pojawi sie przycisk minimapy
+        self.prewencja_przed_wyskakujacymi_oknami("zamykanie_okna")
+        self.klik_w_ok()
+        self.robienie_porzadkow_z_ustawieniami()
 
     def wlonczanie_darkorbit(self):
         self.bocik.wlaczanie_darkorbit()
@@ -347,8 +346,8 @@ class Kierownik():
             self.bocik.WYSYLANIE_SUREK_DUR_i_PRD_i_PROMERIUM = False
 
         self.bocik.wykryj_i_kliknij(17)  # klik na przycisk wysylania surek
-
-        self.czekaj(11,11,11) #czekaj az pojawi sie  przycisk ok
+        sleep(5)
+        self.czekaj(20,11,18)#czekaj az pojawi sie przycisk napisu promerium(w skylabie), przycisku ok lub zamkniecia okna
         self.prewencja_przed_wyskakujacymi_oknami("zamykanie_okna")
         if self.bocik.wykryj_i_kliknij(9):  # odczytujemy potwierdzenie o wysylanych surkach
             self.wpis_do_raportu(f"################# ----- SUROWCE ZOSTALY WYSLANE dla {self.login} ------ ####################")
