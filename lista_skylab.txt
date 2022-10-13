@@ -31,3 +31,10 @@ powiadomienie_o_aktywacji_rafinerii.jpg
 promerium_obraz_odniesienia.jpg
 prometid_odniesienia.jpg
 duranium_odniesienia.jpg
+zmniejszenie_mapy.jpg
+ikona_bazy_misji.jpg
+ikona_aukcji.jpg
+powiekszenie_ladowni.jpg
+napis_aukcja_odniesienia.jpg
+potwierdzenie_o_zlozonej_ofercie.jpg
+przycisk_ok_potwierdzenia_oferty.jpg

@@ -12,6 +12,8 @@ class Kierownik():
     stan_ulepszania_skylabu = []
     nazwy_ulepszanych_modulow =[]
 
+    pasy = []
+    lista =[]
     czas_poczatku_sekwencji =None
 
     robocza_wspolrzedna_x = None
@@ -33,10 +35,23 @@ class Kierownik():
         self.odebranie_surek()
         self.wlonczanie_gry_do_mapy()
         self.prewencja_przed_wyskakujacymi_oknami("zamykanie_okna")
+
+        # self.bocik.wykryj_i_kliknij_skylabu(13)# klika w ok uwaga nowe, tymczasowe !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        # sleep(2) # uwaga nowe, tymczasowe !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        # self.podlatywanie_do_bazy_od_misji() #uwaga nowe, tymczasowe !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        # self.przyjmowanie_misji() # uwaga nowe, tymczasowe !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         self.autopozycjonowanie_do_bazy_handlu_surkami()
         self.czekaj(3,3,3)#czekaj az pojawi sie przycisk handlu surkami
+
+        # sleep(3) # uwaga nowe, tymczasowe !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         self.sprzedaz_surek()
-        self.wysylanie_surek(rodzaj_surek, ilosc_surek)
+        self.wysylanie_surek(login ,rodzaj_surek, ilosc_surek)
+
+        # self.wysylanie_podania_o_przyjecie_do_klanu()# uwaga nowe, tymczasowe !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         self.wylonczanie_darkorbit()
         self.wpis_do_raportu(f"Zakonczono sekwencje - {login}")
         self.wypisz_do_raportu_godzine_przeznaczenia(login)
@@ -68,18 +83,18 @@ class Kierownik():
         # self.wylaczenie_rafinerii_kolektora(login,19) #wylonczanie prometidu
         # self.wylaczenie_rafinerii_kolektora(login, 17) #wylonczanie duranium
 
-        # self.ulepszenie_rafinerii_kolektora(login, 3)  #kolektor terbium
-        # self.ulepszenie_rafinerii_kolektora(login, 1)  #kolektor endurium
-        # self.ulepszenie_rafinerii_kolektora(login, 2)  #kolektor prometrium
+        self.ulepszenie_rafinerii_kolektora(login, 3)  #kolektor terbium
+        self.ulepszenie_rafinerii_kolektora(login, 1)  #kolektor endurium
+        self.ulepszenie_rafinerii_kolektora(login, 2)  #kolektor prometrium
 
         # self.ulepszenie_rafinerii_kolektora(login, 26)  # rafineria promerium
-        # self.ulepszenie_rafinerii_kolektora(login, 27)  # modul xeno
-        # self.ulepszenie_rafinerii_kolektora(login,19) #rafineria prometidu
-        # self.ulepszenie_rafinerii_kolektora(login,17) #rafineria duranium
+        self.ulepszenie_rafinerii_kolektora(login, 27)  # modul xeno
+        self.ulepszenie_rafinerii_kolektora(login,19) #rafineria prometidu
+        self.ulepszenie_rafinerii_kolektora(login,17) #rafineria duranium
 
-        # self.ulepszenie_rafinerii_kolektora(login,5) #modul podstawowy
-        # self.ulepszenie_rafinerii_kolektora(login,6) #modul sloneczny
-        # self.ulepszenie_rafinerii_kolektora(login, 4)  # modul magazynowy
+        self.ulepszenie_rafinerii_kolektora(login,5) #modul podstawowy
+        self.ulepszenie_rafinerii_kolektora(login,6) #modul sloneczny
+        self.ulepszenie_rafinerii_kolektora(login, 4)  # modul magazynowy
 
         self.zapisz_skrina_o_stanie_skylabu(login)
         self.wylonczanie_darkorbit()
@@ -87,8 +102,17 @@ class Kierownik():
         self.wpis_do_raportu(f"Zakonczono sekwencje ulepszania skylabu dla - {login}")
 
 
-
-
+    def sekwencja_licytacji(self,login,nr_zdj_przedmiotu,ilosc_nacisniec_strzalki,ilosc_kredytow):
+        self.login = login
+        self.wpis_do_raportu(f"Rozpoczeto sekwencje - {login}")
+        self.wlonczanie_darkorbit()
+        self.czekaj(2, 16,5)  # czekaj az pojawi sie przycisk logowania lub do zatwierdzenia prywatnosci lub ikona minimapy
+        self.prewencja_przed_wyskakujacymi_oknami("zgoda_prywatnosci")
+        self.logowanie(login)
+        self.czekaj(18, 15, 5)  # czekaj az pojawi sie przycisk zamkniecia okna lub startu lub ikona minimapy
+        self.prewencja_przed_wyskakujacymi_oknami("zamykanie_okna")
+        self.zalicytuj_w_aukcji(nr_zdj_przedmiotu=nr_zdj_przedmiotu,ilosc_nacisniec_strzalki=ilosc_nacisniec_strzalki,ilosc_kredytow=ilosc_kredytow)
+        self.wylonczanie_darkorbit()
     def sekwencja_pierwszego_logowania(self, login, haslo):
         self.login = login
         self.wlonczanie_darkorbit()
@@ -103,6 +127,11 @@ class Kierownik():
         self.prewencja_przed_wyskakujacymi_oknami("zamykanie_okna")
         self.klik_w_ok()
         self.robienie_porzadkow_z_ustawieniami()
+        self.zapisz_skrina_o_stanie_skylabu(login)
+        self.wylonczanie_darkorbit()
+        self.wpis_do_sprawozdania(f"Pierwsze logowanie dla konta {login} zakonczone")
+
+
 
     def wlonczanie_darkorbit(self):
         self.bocik.wlaczanie_darkorbit()
@@ -149,7 +178,7 @@ class Kierownik():
         self.bocik.wykryj_i_kliknij_skylabu(7)  # klikamy na przycisk buduj
         self.czekaj(11,11,15)# czeka na przycisk ok lub przycisk startu
         sleep(2)
-        if self.bocik.wykryj_i_kliknij_skylabu(8):  # odczytujemy potwierdzenie o modernizacji
+        if self.bocik.wykryj_i_kliknij_skylabu(8, threshold=0.8):  # odczytujemy potwierdzenie o modernizacji
             self.wpis_do_raportu(f"Modul {self.bocik.daj_nazwe_obiektu(nr_kolektora)} zostal ulepszony dla {login} ------ ####################")
             self.stan_ulepszania_skylabu.append(1)
             self.nazwy_ulepszanych_modulow.append(self.bocik.daj_nazwe_obiektu(nr_kolektora))
@@ -205,11 +234,16 @@ class Kierownik():
         sleep(2)
 
     def robienie_porzadkow_z_ustawieniami(self):
+        self.bocik.wykryj_i_kliknij_skylabu(13)
         self.bocik.wykryj_i_kliknij_skylabu(15) #ikona ustawien
         sleep(3)
         self.bocik.WLACZ_USTAWIANIE_USTAWIEN = True
         self.bocik.wykryj_i_kliknij_skylabu(16)
         self.bocik.WLACZ_USTAWIANIE_USTAWIEN = False
+        self.bocik.wykryj_i_kliknij_skylabu(33)
+        sleep(1)
+        self.bocik.wykryj_i_kliknij_skylabu(33)
+        sleep(1)
         print("koniec")
 
     def napisz_sprawozdanie_skylabu(self, login):
@@ -233,7 +267,11 @@ class Kierownik():
         self.stan_ulepszania_skylabu.clear()
         self.nazwy_ulepszanych_modulow.clear()
 
-
+    def wpis_do_sprawozdania(self, wpis):
+        now = datetime.now()
+        aktualny_czas = now.strftime("%H:%M:%S")
+        with open("Sprawozdanie.txt", "a") as text_file:
+            text_file.writelines(f"-[{aktualny_czas}]- " + f"{wpis}" + '\n')
 
     def zapisz_skrina_o_stanie_skylabu(self,login):
         sleep(2)
@@ -288,6 +326,43 @@ class Kierownik():
         self.bocik.wykryj_i_kliknij(5)  # pozycjonowanie mapy i ruszanie statkiem do bazy
         self.bocik.WLACZ_POZYCJONOWANIE_MAPY = False
 
+    def podlatywanie_do_bazy_od_misji(self):
+        sleep(10)
+
+        self.bocik.WLACZ_POZYCJONOWANIE_MAPY_DO_MISJI = True
+        self.bocik.wykryj_i_kliknij(5)  # pozycjonowanie mapy i ruszanie statkiem do bazy
+        self.bocik.WLACZ_POZYCJONOWANIE_MAPY_DO_MISJI = False
+
+    def przyjmowanie_misji(self):
+        self.czekaj(21,21,21) #czeka na ikone misji
+        sleep(2)
+        self.bocik.wykryj_i_kliknij(21)
+        self.czekaj(22, 22, 22)  # czeka na przycisk zamkniecia okna bazy misji
+        self.zapisz_skrina_o_stanie_skylabu(self.login)
+        sleep(2)
+        self.bocik.wykryj_i_kliknij(22)
+
+
+    def wysylanie_podania_o_przyjecie_do_klanu(self):
+        self.bocik.wykryj_i_kliknij(26) # klik w ikone klanu
+        self.czekaj(23,23,23) #czekaj na pole wyszukiwania
+        sleep(0.5)
+        self.bocik.wykryj_i_kliknij(23)
+        sleep(1)
+        self.wpisz("KOMANDO_KOJATEL")
+        sleep(0.25)
+        self.zatwierdz_enterem()
+        self.czekaj(24,24,24) #czekaj na nazwe klanu
+        sleep(0.5)
+        self.bocik.wykryj_i_kliknij(24) #klik w nazwe klanu
+        self.czekaj(25,25,25) #czekaj na przycisk wysyłania
+        sleep(1)
+        self.bocik.wykryj_i_kliknij(25) #klik w wysylanie podania
+        self.zapisz_skrina_o_stanie_skylabu(self.login)
+        sleep(2)
+        if self.bocik.wykryj_i_kliknij(27):
+            self.wpis_do_sprawozdania(f"Wysylanie podania dla {self.login} zakonczone POWODZENIEM :)")
+        else: self.wpis_do_sprawozdania(f"Wysylanie podania dla {self.login} zakonczone porazka ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
     def sprzedaz_surek(self):
         self.bocik.wykryj_i_kliknij(3)  # wlaczamy handel surkami
@@ -300,7 +375,7 @@ class Kierownik():
 
 
 
-    def wysylanie_surek(self, rodzaj_surek, ilosc_surek):
+    def wysylanie_surek(self,login ,rodzaj_surek, ilosc_surek):
         sleep(1)
         self.bocik.wykryj_i_kliknij(7)  # przechodzimy z powrotem do zakladki obok
         sleep(15)
@@ -347,6 +422,7 @@ class Kierownik():
 
         self.bocik.wykryj_i_kliknij(17)  # klik na przycisk wysylania surek
         sleep(5)
+        self.zapisz_skrina_o_stanie_skylabu(login)
         self.czekaj(20,11,18)#czekaj az pojawi sie przycisk napisu promerium(w skylabie), przycisku ok lub zamkniecia okna
         self.prewencja_przed_wyskakujacymi_oknami("zamykanie_okna")
         if self.bocik.wykryj_i_kliknij(9):  # odczytujemy potwierdzenie o wysylanych surkach
@@ -380,7 +456,7 @@ class Kierownik():
                 self.stan_misji = None
                 self.ilosc_surek = None
 
-            if self.ilosc_surek ==750  or self.ilosc_surek==500 :
+            if self.ilosc_surek ==750  or self.ilosc_surek==500 or self.ilosc_surek==120:
                 now = datetime.now()
                 aktualny_czas = now.strftime("%H:%M:%S")
                 five_hour = timedelta(hours=3)
@@ -428,9 +504,11 @@ class Kierownik():
         czas_za_6_godzin = self.czas_poczatku_sekwencji + six_hour
 
         roznica_w_minutach = roznica_sekundach / 60
+        reszta_w_minutach = roznica_w_minutach % 60
+        roznica_w_godzinie = roznica_sekundach / 3600
         reszta_w_sekundach = roznica_sekundach % 60
         with open("Sprawozdanie.txt", "a") as text_file:
-            text_file.writelines("~~~~~~~~~~~~~~"+'\n'+f"[{aktualny_czas}]- " +'\n'+f"Czas rozpoczecia sekwencji zarabiania: {czas_rozpoczecia}s"+'\n'+f"Czas zakonczenia sekwencji zarabiania: {czas_konca_sekwencjii}s"+'\n'+ f"Czas sekwencji handlowej wyniosl: {int(roznica_w_minutach)}min {int(reszta_w_sekundach)}s" +'\n' +f"Okres uspienia zakonczy sie po: {sekundy} sekundach, czyli o godzinie: {czas_za_6_godzin}~~~~~~" + '\n' +"~~~~~~~~~~~~~~" + '\n'+ '\n')
+            text_file.writelines("~~~~~~~~~~~~~~"+'\n'+f"[{aktualny_czas}]- " +'\n'+f"Czas rozpoczecia sekwencji zarabiania: {czas_rozpoczecia}s"+'\n'+f"Czas zakonczenia sekwencji zarabiania: {czas_konca_sekwencjii}s"+'\n'+ f"Czas sekwencji handlowej wyniosl: {int(roznica_w_godzinie)}godz {int(reszta_w_minutach)}min {int(reszta_w_sekundach)}s" +'\n' +f"Okres uspienia zakonczy sie po: {sekundy} sekundach, czyli o godzinie: {czas_za_6_godzin}~~~~~~" + '\n' +"~~~~~~~~~~~~~~" + '\n'+ '\n')
 
     def daj_aktualna_godzine(self):
         self.czas_poczatku_sekwencji = datetime.now()
@@ -449,12 +527,12 @@ class Kierownik():
         self.wpis_do_sprawozdania_informacji_o_godzinie_wybudzenia(czas_przerwy,czas_konca_sekwencji,roznica)
 
 
-    def zapisanie_godziny_wybudzenia(self):
+    def zapisanie_godziny_wybudzenia(self, uwzgledniana_ilosc_godzin):
         czas = time()
-        czas_z_6_godzinami = czas + (3600*6)
+        czas_z_6_godzinami = czas + (3600*uwzgledniana_ilosc_godzin)
 
         now = datetime.now()
-        six_hour = timedelta(hours=6)
+        six_hour = timedelta(hours=uwzgledniana_ilosc_godzin)
         czas_za_6_godzin = now + six_hour
         czas_za_6_godzin = czas_za_6_godzin.strftime("%H:%M:%S")
 
@@ -507,7 +585,17 @@ class Kierownik():
         nowy_czas = new.strftime("%H:%M:%S")
         print(nowy_czas)
 
+    def wpisz(self, tekst):
+        self.bocik.wpisz_z_klawiatury(tekst)
 
+    def wcisnij(self, klawisz, ilosc_razy=1):
+        self.bocik.wcisnij_klawisz(klawisz,ile_razy=ilosc_razy)
+
+    def zatwierdz_enterem(self):
+        self.bocik.wcisnij_enter()
+
+    def skroluj(self, ilosc_skrola,x,y):
+        self.bocik.roluj_rolka_myszki(ilosc_skrola,x,y)
 
     def wyplac_hajsownikom(self,ilosc_statkow, numer_statku, ilosc_kredytow):
         for x in range(ilosc_statkow):
@@ -526,6 +614,76 @@ class Kierownik():
                 sleep(2)
                 self.bocik.wykryj_i_kliknij_skylabu(23)
             else: print("ni ma wyplaty")
+
+    def zalicytuj_w_aukcji(self,nr_zdj_przedmiotu, ilosc_nacisniec_strzalki, ilosc_kredytow):
+
+        ilosc_kredytow_str = str(ilosc_kredytow)
+        # self.utworz_liste(nazwa_pliku="loginy_do_licytacji.txt")
+
+        self.bocik.wykryj_i_kliknij_skylabu(35)
+        self.czekaj(28,28,28) #czeka aż pojawi się napis aukcji
+        self.bocik.wykryj_i_kliknij_skylabu(37)
+        sleep(0.5)
+        self.wcisnij('tab')
+        sleep(1)
+        for x in range(ilosc_nacisniec_strzalki):
+            self.wcisnij('down') #przewija do ikony przedmiotu
+            sleep(0.3)
+        sleep(1)
+        self.bocik.wykryj_i_kliknij_skylabu(nr_zdj_przedmiotu)
+        sleep(1)
+        self.wcisnij('tab')
+        sleep(0.5)
+        self.wpisz(ilosc_kredytow_str)
+        self.zatwierdz_enterem()
+        self.czekaj(29,29,18) #czekaj na przycisk ok, lub zamkniecia okna
+
+        if self.bocik.wykryj_i_kliknij_skylabu(38):
+            self.wpis_do_sprawozdania(f"Dla {self.login} pomyslnie zlozono oferte w ilosci {ilosc_kredytow} kredytow na {self.bocik.daj_nazwe_obiektu(numer_celu=nr_zdj_przedmiotu)}"+'\n')
+            self.wpis_do_raportu(f"Dla {self.login} pomyslnie zlozono oferte w ilosci {ilosc_kredytow} kredytow"+'\n')
+        else:
+            self.wpis_do_sprawozdania(f"!!!!!!!!!Dla {self.login} nie udalo sie zlozyc oferty na {self.bocik.daj_nazwe_obiektu(numer_celu=nr_zdj_przedmiotu)}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+'\n')
+            self.wpis_do_raportu(f"!!!!!!!!!Dla {self.login} nie udalo sie zlozyc oferty na {self.bocik.daj_nazwe_obiektu(numer_celu=nr_zdj_przedmiotu)}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+'\n')
+            self.bocik.wykryj_i_kliknij_skylabu(39)
+        self.bocik.wykryj_i_kliknij_skylabu(39)
+        sleep(5)
+
+    def utworz_liste(self, nazwa_pliku):
+
+        plik_txt = open(nazwa_pliku)
+        nowa_lista = plik_txt.readlines()         #robimy tablice z linijek z pliku txt
+        plik_txt.close()
+        tymczasowa_lista = []
+
+        for x in range(len(nowa_lista)):    #petla do usuwania znaku nowej linii z loginow
+            tymczasowa_lista.append(nowa_lista[x].rstrip('\n'))
+        print(tymczasowa_lista)
+        return tymczasowa_lista
+
+    def aukcja_trzymanie_numeru_konta(self,numer):
+        numer_str = str(numer)
+
+        plik_txt = open("kolejka_aukcji.txt")
+        nowa_lista = plik_txt.readlines()  # robimy tablice z linijek z pliku txt
+        plik_txt.close()
+
+
+        with open("kolejka_aukcji.txt", "w") as text_file:
+            text_file.writelines(f"{numer_str}")
+
+
+    # def aktualizacja_listy_kont(self):
+    #     with open("kolejka_aukcji.txt", "w") as text_file:
+    #         text_file.writelines(f"{numer_str}")
+
+    # def wczytaj_plik_PASY_i_utworz_liste(self):
+    #     plik_txt = open('pasy.txt')
+    #     self.pasy = plik_txt.readlines()         #robimy tablice z pasami z pliku txt
+    #     plik_txt.close()
+    #
+    #     liczba_kont = int(len(self.pasy) / 2)  # bierzemy liczbe kont do petli for
+    #     print("liczba_kont= ",liczba_kont)
+
 
 
     # def zakladanie_nowego_konta_darkorbit(self): #trzeba dac plik txt z pasami

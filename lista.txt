@@ -19,3 +19,12 @@ wysylania_surowcow.JPG
 zamkniecia_okna.JPG
 zamkniecia_okna2.JPG
 promerium_obraz_odniesienia.JPG
+ikona_bazy_misji.JPG
+zamkniecie_okna_bazy_misji.JPG
+pole_wyszukiwania.JPG
+klik_w_nazwe_klanu.JPG
+przycisk_wysylania_podania.JPG
+ikona_klanu.JPG
+przycisk_zamknij.JPG
+napis_aukcja_odniesienia.JPG
+przycisk_ok_potwierdzenia_oferty.JPG

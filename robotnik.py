@@ -19,6 +19,7 @@ class Robotnik:
     window_offset = (0, 0)
     WLACZ_HANDEL = False
     WLACZ_POZYCJONOWANIE_MAPY = False
+    WLACZ_POZYCJONOWANIE_MAPY_DO_MISJI = False
 
     WYSYLANIE_SUREK_PROMERIUM = False
     WYSYLANIE_SUREK_DUR_i_PROMETID = False
@@ -206,6 +207,15 @@ class Robotnik:
             if self.WLACZ_POZYCJONOWANIE_MAPY:
                 sleep(0.5)
                 pyautogui.moveTo(self.screen_x + 142, self.screen_y + 139)
+                sleep(0.5)
+                pyautogui.click()
+                sleep(0.5)
+
+                print("sekwencja pozycjonowania na mapie skonczona")
+
+            if self.WLACZ_POZYCJONOWANIE_MAPY_DO_MISJI:
+                sleep(0.5)
+                pyautogui.moveTo(self.screen_x + 132, self.screen_y + 129)
                 sleep(0.5)
                 pyautogui.click()
                 sleep(0.5)
@@ -747,3 +757,23 @@ class Robotnik:
         pyautogui.click()
         pyautogui.write(ilosc_kredytow_str)
         pyautogui.press('enter')
+
+    def wpisz_z_klawiatury(self, tekst):
+        pyautogui.write(tekst)
+
+    def wcisnij_klawisz(self, klawisz, ile_razy):
+        pyautogui.press(klawisz,presses=ile_razy)
+
+    def wcisnij_enter(self):
+        pyautogui.press('enter')
+
+    def roluj_rolka_myszki(self, ilosc_rolniec, x , y):
+        pyautogui.click()
+        pyautogui.scroll(ilosc_rolniec, x=x, y=y)
+        pyautogui.scroll(ilosc_rolniec)
+        pyautogui.scroll(ilosc_rolniec)
+        pyautogui.scroll(ilosc_rolniec)
+        pyautogui.scroll(ilosc_rolniec)
+        pyautogui.scroll(ilosc_rolniec)
+        pyautogui.vscroll(ilosc_rolniec)
+        print("skrolowania koniec")
